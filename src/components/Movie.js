@@ -10,15 +10,15 @@ function Movies(props) {
 
       <div className="movie__info">
         <h3 className="movie-name">{movie.title_long}</h3>
-        <h4 className="genres">
+        <p className="genres">
           Genres:
           {movie.genres.map((genre, index) => (
             <span key={index} className="genre">
               #{genre}
             </span>
           ))}
-        </h4>
-        <a href={movie.url} className="download-btn">
+        </p>
+        <a href={movie.url} className="download-link">
           Download
         </a>
       </div>

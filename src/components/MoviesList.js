@@ -1,16 +1,17 @@
 import React from "react";
 import Movie from "./Movie";
-import Status from "./Status";
 
-function MoviesList({ movies, loading, loadingText }) {
+function MoviesList({ movies, isLoading, loadingText }) {
   return (
     <main>
-      {loading && <Status text={loadingText} />}
-      <div className="section-center">
-        {movies.map((movie) => (
-          <Movie movie={movie} key={movie.id} />
-        ))}
-      </div>
+      <section className="movies-list">
+        {isLoading && <p className="status-text">{loadingText}</p>}
+        <div className="section-center">
+          {movies.map((movie) => (
+            <Movie movie={movie} key={movie.id} />
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

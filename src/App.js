@@ -1,25 +1,27 @@
-import React, { useState, useReducer, useContext } from "react";
+import React, { useState, useReducer } from "react";
+
 import Header from "./components/Header";
 import MoviesList from "./components/MoviesList";
 import { reducer } from "./components/reducer";
-import { options } from "./components/fetchOptions";
 
 const initialState = {
-  loading: false,
+  isLoading: false,
   alert: "",
   loadingText: "",
-};
-
-const AppContext = React.createContext();
-
-export const UseGlobalContext = () => {
-  return useContext(AppContext);
 };
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [movieName, setMovieName] = useState("");
   const [movies, setMovies] = useState([]);
+
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "38dd258aebmshec9cdf190c739c7p13ae03jsne258e0911332",
+      "X-RapidAPI-Host": "movies-and-serials-torrent.p.rapidapi.com",
+    },
+  };
 
   // fetch movies from api
   const getMovies = async (name) => {
@@ -28,46 +30,37 @@ function App() {
         `https://movies-and-serials-torrent.p.rapidapi.com/movies/search/${name}`,
         options
       );
+
       const data = await response.json();
       const { movie_count, movies } = data.data;
 
       if (data && movie_count > 0) {
         dispatch({ type: "DATA" });
-
         setMovies(movies);
-
         setMovieName("");
       } else {
         dispatch({ type: "NO_DATA" });
-
         setMovies([]);
-
         setMovieName("");
       }
-    } catch {
+    } catch (err) {
       dispatch({ type: "ERROR" });
     }
   };
 
-  // useEffect(() => {}, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (movieName) {
       dispatch({ type: "VALUE" });
-
       setMovies([]);
-
       getMovies(movieName);
     } else {
       dispatch({ type: "NO_VALUE" });
     }
   };
 
-  const handleChange = (e) => {
+  const handleNameChange = (e) => {
     const { value } = e.target;
-
     setMovieName(value);
   };
 
@@ -82,12 +75,12 @@ function App() {
         movieName={movieName}
         alert={state.alert}
         hideAlert={hideAlert}
-        handleChange={handleChange}
+        handleNameChange={handleNameChange}
       />
 
       <MoviesList
         movies={movies}
-        loading={state.loading}
+        isLoading={state.isLoading}
         loadingText={state.loadingText}
       />
     </>

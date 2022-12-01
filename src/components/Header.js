@@ -7,18 +7,16 @@ function Header({
   movieName,
   alert,
   hideAlert,
-  handleChange,
+  handleNameChange,
 }) {
   return (
     <header className="header">
       <div className="section-center">
-        {alert && <Alert alert={alert} hideAlert={hideAlert} />}
-        <h2>Movie Search</h2>
-
+        <h2 className="title">Movie Search</h2>
         <form className="form" onSubmit={onSubmit}>
           <input
             type="text"
-            onChange={handleChange}
+            onChange={handleNameChange}
             value={movieName}
             placeholder="type your movie name..."
           />
@@ -26,6 +24,7 @@ function Header({
             Search
           </button>
         </form>
+        {alert && <Alert alert={alert} hideAlert={hideAlert} />}
       </div>
     </header>
   );

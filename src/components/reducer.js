@@ -2,17 +2,17 @@ export const reducer = (state, action) => {
   if (action.type === "VALUE") {
     return {
       ...state,
-      loading: true,
+      isLoading: true,
       alert: "",
-      loadingText: "Searching results...",
+      loadingText: "Searching for results...",
     };
   }
 
   if (action.type === "NO_VALUE") {
     return {
       ...state,
-      loading: false,
-      alert: "Enter movie name",
+      isLoading: false,
+      alert: "Enter a movie name",
       loadingText: "",
     };
   }
@@ -20,7 +20,7 @@ export const reducer = (state, action) => {
   if (action.type === "HIDE_ALERT") {
     return {
       ...state,
-      loading: false,
+      isLoading: false,
       alert: "",
       loadingText: "",
     };
@@ -29,7 +29,7 @@ export const reducer = (state, action) => {
   if (action.type === "DATA") {
     return {
       ...state,
-      loading: false,
+      isLoading: false,
       alert: "",
       loadingText: "",
     };
@@ -38,7 +38,7 @@ export const reducer = (state, action) => {
   if (action.type === "NO_DATA") {
     return {
       ...state,
-      loading: true,
+      isLoading: true,
       alert: "",
       loadingText: "No movies matched your search result",
     };
@@ -47,7 +47,7 @@ export const reducer = (state, action) => {
   if (action.type === "ERROR") {
     return {
       ...state,
-      loading: false,
+      isLoading: false,
       alert: "An error occured, try again",
       loadingText: "",
     };
