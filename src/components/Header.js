@@ -7,7 +7,7 @@ function Header({
   movieName,
   alert,
   hideAlert,
-  handleNameChange,
+  onNameChange,
 }) {
   return (
     <header className="header">
@@ -16,7 +16,7 @@ function Header({
         <form className="form" onSubmit={onSubmit}>
           <input
             type="text"
-            onChange={handleNameChange}
+            onChange={onNameChange}
             value={movieName}
             placeholder="type your movie name..."
           />

@@ -75,7 +75,7 @@ function App() {
         movieName={movieName}
         alert={state.alert}
         hideAlert={hideAlert}
-        handleNameChange={handleNameChange}
+        onNameChange={handleNameChange}
       />
 
       <MoviesList
